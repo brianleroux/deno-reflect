@@ -1,6 +1,9 @@
 @app
 begin-app
 
+@begin
+lint "deno --version"
+
 @http
 get /
 
