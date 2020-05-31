@@ -14,14 +14,14 @@ import { createClient } from "https://denopkg.com/chiefbiiko/dynamodb/mod.ts";
 
 export async function handler() {
   
-  const env = Deno.env.toObject()
-  
+  let env = Deno.env.toObject()
+  let table = 'test-table'
+  let key = 'foo'
   let env = env.NODE_ENV === 'testing'? 'staging' : (env.NODE_ENV || 'staging')
   let scopeID = env.BEGIN_DATA_SCOPE_ID || env.ARC_APP_NAME || 'sandbox'
   let dataID = `${env}#${table}#${key}`
-  
-  
   let dyno = createClient();
+  
   let result = await dyno.query({
         TableName: env.BEGIN_DATA_TABLE_NAME,
         Select: 'COUNT',
