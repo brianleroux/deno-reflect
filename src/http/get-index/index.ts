@@ -17,9 +17,9 @@ export async function handler() {
   let env = Deno.env.toObject()
   let table = 'test-table'
   let key = 'foo'
-  let env = env.NODE_ENV === 'testing'? 'staging' : (env.NODE_ENV || 'staging')
+  let stage = env.NODE_ENV === 'testing'? 'staging' : (env.NODE_ENV || 'staging')
   let scopeID = env.BEGIN_DATA_SCOPE_ID || env.ARC_APP_NAME || 'sandbox'
-  let dataID = `${env}#${table}#${key}`
+  let dataID = `${stage}#${table}#${key}`
   let dyno = createClient();
   
   let result = await dyno.query({
